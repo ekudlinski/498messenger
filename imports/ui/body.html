@@ -1,0 +1,87 @@
+<body>
+    {{> page}}
+</body>
+
+<template name='page'>
+    {{#if currUser}}
+        <span>Hello, {{currUser}}</span>
+        <button type='button' name='logout' id='logoutBtn'>logout</button>
+        <select id="userDropdown">
+           <option selected='selected' disabled='disabled'>select another user</option>
+            {{#each otherUsers}}
+                {{> dropdown}}
+            {{/each}}
+        </select>
+        <form id='newMsgForm'>
+            <input type='text' name='newMsg' id='newMsgText'>
+            <input type='submit' name='submitMsg' id='submitMsgBtn'>
+        </form>
+        <div id='convoHistory'>
+            {{#each sharedMsgs}}
+                {{> pastMsg}}
+            {{/each}}
+        </div>
+    {{else}}
+        <form>
+            username:
+            <input type='text' name='username' id='formText'> 
+            <br>
+            <input type='submit' name='createAcct' id='createAcct' value="create account">
+            <input type='submit' name = 'loginBtn' id='login' value ="login existing user">
+        </form>
+        {{#if errorMsg}}
+            <p>{{errorMsg}}</p>
+        {{/if}}
+    {{/if}}
+</template>
+
+<template name='dropdown'>
+   <option value='{{username}}' text='{{username}}'>{{username}}</option>
+</template>
+
+<template name='pastMsg'>
+    <span >{{sender}}: {{text}}</span> <button type="button" id='{{_id}}' class='deleteBtn'>X</button> <br>
+</template>
+ 
+<!--
+ <body>
+  <h1>Welcome to Meteor!</h1>
+
+  {{> hello}}
+  {{> info}}
+</body>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
+-->
+
+<!--
+<body>
+  <div class="container">
+    <header>
+      <h1>Todo List</h1>
+    </header>
+ 
+    <ul>
+      {{#each tasks}}
+        {{> task}}
+      {{/each}}
+    </ul>
+  </div>
+</body>
+ 
+<template name="task">
+  <li>{{text}}</li>
+</template>-->
